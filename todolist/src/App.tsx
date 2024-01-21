@@ -19,6 +19,14 @@ function App() {
     setTodos([...todos, newTodo]);
   }
 
+  function setTodoCompleted(id: number, completed: boolean) {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: completed } : todo
+      )
+    );
+  }
+
   return (
     <div className="App">
       <h1>To Do</h1>
@@ -46,8 +54,13 @@ function App() {
             }
           >
             <span>
-              <input type="checkbox" checked={todo.completed} />
-              {todo.completed ? "DONE: " : "TODO: "}
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={(event) =>
+                setTodoCompleted(todo.id, event.target.checked)
+              }
+            />              {todo.completed ? "DONE: " : "TODO: "}
               {todo.title}
             </span>
           </li>
