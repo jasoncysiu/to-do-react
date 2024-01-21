@@ -31,6 +31,10 @@ function App() {
     setTodos(todos.filter((todo) => todo.id !== id));
   }
 
+  const numTodos = todos.length;
+  const numCompletedTodos = todos.filter((todo) => todo.completed).length;
+  const numIncompleteTodos = numTodos - numCompletedTodos;
+
   return (
     <div className="App">
       <h1>To Do</h1>
@@ -73,6 +77,12 @@ function App() {
           </li>
         ))}
       </ul>
+
+
+      <div className="Statistics">
+        {numTodos} todos ({numIncompleteTodos} incomplete, {numCompletedTodos}{" "}
+        completed)
+      </div>
     </div>
   );
 }
