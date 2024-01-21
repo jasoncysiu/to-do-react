@@ -27,6 +27,10 @@ function App() {
     );
   }
 
+  function deleteTodo(id: number) {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  }
+
   return (
     <div className="App">
       <h1>To Do</h1>
@@ -53,16 +57,19 @@ function App() {
                 : "TodoItem TodoItem--Incomplete"
             }
           >
-            <span>
+           
             <input
               type="checkbox"
               checked={todo.completed}
               onChange={(event) =>
                 setTodoCompleted(todo.id, event.target.checked)
               }
-            />              {todo.completed ? "DONE: " : "TODO: "}
+            />             
+             <span className="TodoItem__Text">
+             {todo.completed ? "DONE: " : "TODO: "}
               {todo.title}
             </span>
+            <button onClick={() => deleteTodo(todo.id)}>delete</button>
           </li>
         ))}
       </ul>
